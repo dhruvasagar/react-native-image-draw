@@ -12,7 +12,7 @@ import {
   View,
   ViewStyle,
   ImageBackground,
-  ImageSourcePropType,
+  ImageBackgroundProps,
 } from "react-native";
 import {
   PanGestureHandler,
@@ -110,7 +110,7 @@ export interface CanvasProps {
   /**
    * Image source for the background image
    */
-  imageSource?: ImageSourcePropType;
+  imageSource?: ImageBackgroundProps;
 }
 
 export interface SimplifyOptions {
@@ -219,7 +219,7 @@ const Canvas = forwardRef<CanvasRef, CanvasProps>(
       eraserSize = DEFAULT_ERASER_SIZE,
       tool = DEFAULT_TOOL,
       combineWithLatestPath = false,
-      imageSource = {},
+      imageSource = { source: {} },
     }: CanvasProps,
     ref
   ) => {
@@ -431,48 +431,44 @@ const Canvas = forwardRef<CanvasRef, CanvasProps>(
       }
     };
 
-    const AnimatedImageBackground =
-      Animated.createAnimatedComponent(ImageBackground);
-
     return (
-      <AnimatedImageBackground
-        source={imageSource}
-        style={canvasContainerStyles}
-      >
-        <PanGestureHandler
-          maxPointers={1}
-          minDist={0}
-          avgTouches={false}
-          onHandlerStateChange={onHandlerStateChange}
-          onGestureEvent={onGestureEvent}
-          hitSlop={{
-            height,
-            width,
-            top: 0,
-            left: 0,
-          }}
-          shouldCancelWhenOutside
-        >
-          <View>
-            <RendererHelper
-              currentColor={color}
-              currentOpacity={opacity}
-              currentPath={path}
-              currentThickness={thickness}
-              currentPathTolerance={
-                simplifyOptions.simplifyCurrentPath
-                  ? simplifyOptions.amount!
-                  : 0
-              }
-              roundPoints={simplifyOptions.roundPoints!}
-              paths={paths}
-              height={height}
-              width={width}
-              Renderer={SVGRenderer}
-            />
-          </View>
-        </PanGestureHandler>
-      </AnimatedImageBackground>
+      <Animated.View style={canvasContainerStyles}>
+        <ImageBackground {...imageSource}>
+          <PanGestureHandler
+            maxPointers={1}
+            minDist={0}
+            avgTouches={false}
+            onHandlerStateChange={onHandlerStateChange}
+            onGestureEvent={onGestureEvent}
+            hitSlop={{
+              height,
+              width,
+              top: 0,
+              left: 0,
+            }}
+            shouldCancelWhenOutside
+          >
+            <View>
+              <RendererHelper
+                currentColor={color}
+                currentOpacity={opacity}
+                currentPath={path}
+                currentThickness={thickness}
+                currentPathTolerance={
+                  simplifyOptions.simplifyCurrentPath
+                    ? simplifyOptions.amount!
+                    : 0
+                }
+                roundPoints={simplifyOptions.roundPoints!}
+                paths={paths}
+                height={height}
+                width={width}
+                Renderer={SVGRenderer}
+              />
+            </View>
+          </PanGestureHandler>
+        </ImageBackground>
+      </Animated.View>
     );
   }
 );
