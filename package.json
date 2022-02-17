@@ -1,6 +1,6 @@
 {
   "name": "react-native-image-draw",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "description": "Cross-platform React Native drawing over image component",
   "main": "lib/commonjs/index.js",
   "types": "lib/typescript/src/index.d.ts",
