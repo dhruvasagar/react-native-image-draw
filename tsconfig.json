@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     "baseUrl": "./",
-    "target": "ES6",
-    "module": "CommonJS",
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
     "jsx": "react-native",
     "declaration": true,
     "outDir": "./lib",
@@ -15,6 +16,11 @@
       "root/*": ["./*"]
     }
   },
-  "include": ["./src/**/*"],
-  "exclude": ["node_modules", "example/node_modules", "lib"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/__tests__/*"
+  ]
 }
