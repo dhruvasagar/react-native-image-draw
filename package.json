@@ -13,8 +13,6 @@
     "!**/__mocks__"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "prepublish": "npm run build",
     "lint": "eslint . --fix --ext .ts,.tsx",
     "prettier": "prettier --write \"**/*.+(ts|tsx|scss|json)\"",
     "test": "echo \"Error: no test specified\" && exit 1",
