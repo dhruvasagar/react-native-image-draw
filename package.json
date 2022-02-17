@@ -2,19 +2,23 @@
   "name": "react-native-image-draw",
   "version": "0.1.3",
   "description": "Cross-platform React Native drawing over image component",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "lib/commonjs/index.js",
+  "types": "lib/typescript/src/index.d.ts",
   "private": false,
   "files": [
     "src",
-    "lib"
+    "lib",
+    "!**/__tests__",
+    "!**/__fixtures__",
+    "!**/__mocks__"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "prepublish": "npm run build",
     "lint": "eslint . --fix --ext .ts,.tsx",
     "prettier": "prettier --write \"**/*.+(ts|tsx|scss|json)\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "bob build"
   },
   "repository": {
     "type": "git",
@@ -45,10 +49,6 @@
     "@types/react-native": "0.64.3",
     "@typescript-eslint/eslint-plugin": "^5.7.0",
     "@typescript-eslint/parser": "^5.7.0",
-    "react": "*",
-    "react-native": "*",
-    "react-native-gesture-handler": ">=1.10.0",
-    "react-native-svg": ">=12.0.0",
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
@@ -56,6 +56,11 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-react-native": "^4.0.0",
     "prettier": "^2.5.1",
+    "react": "*",
+    "react-native": "*",
+    "react-native-builder-bob": "^0.18.2",
+    "react-native-gesture-handler": ">=1.10.0",
+    "react-native-svg": ">=12.0.0",
     "typescript": "^4.5.5"
   },
   "peerDependencies": {
@@ -69,5 +74,20 @@
       "npx prettier --write",
       "eslint --fix"
     ]
-  }
+  },
+  "react-native": "src/index.tsx",
+  "module": "lib/module/index.js",
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "commonjs",
+      "module",
+      "typescript"
+    ]
+  },
+  "eslintIgnore": [
+    "node_modules/",
+    "lib/"
+  ]
 }
