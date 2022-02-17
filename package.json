@@ -1,0 +1,67 @@
+{
+  "name": "@dhruvasagar/react-native-image-draw",
+  "version": "0.1.0",
+  "description": "Cross-platform React Native drawing over image component",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepublish": "npm run build",
+    "lint": "eslint . --fix --ext .ts,.tsx",
+    "prettier": "prettier --write \"**/*.+(ts|tsx|scss|json)\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dhruvasagar/react-native-image-draw.git"
+  },
+  "author": "Dhruva Sagar <dhruva@protonmail.com> (https://github.com/dhruvasagar)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dhruvasagar/react-native-image-draw/issues"
+  },
+  "homepage": "https://github.com/dhruvasagar/react-native-image-draw#readme",
+  "keywords": [
+    "react-native-component",
+    "react-component",
+    "react-native",
+    "ios",
+    "android",
+    "draw",
+    "image",
+    "svg"
+  ],
+  "dependencies": {
+    "@luncheon/simplify-svg-path": "^0.1.4",
+    "react": "*",
+    "react-native": "*",
+    "react-native-gesture-handler": ">=1.10.0",
+    "react-native-svg": ">=12.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.1",
+    "@types/react-native": "0.64.3",
+    "@typescript-eslint/eslint-plugin": "^5.7.0",
+    "@typescript-eslint/parser": "^5.7.0",
+    "eslint": "^8.9.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-react-native": "^4.0.0",
+    "prettier": "^2.5.1",
+    "typescript": "^4.5.5"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*",
+    "react-native-gesture-handler": ">=1.10.0",
+    "react-native-svg": ">=12.0.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "npx prettier --write",
+      "eslint --fix"
+    ]
+  }
+}
