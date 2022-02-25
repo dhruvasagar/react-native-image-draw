@@ -374,6 +374,9 @@ const Canvas = forwardRef<CanvasRef, CanvasProps>(
             }, [])
           );
           break;
+        case DrawingTool.Emoji:
+        case DrawingTool.Text:
+          break;
       }
     };
 

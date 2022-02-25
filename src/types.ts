@@ -39,4 +39,6 @@ export interface PathType {
 export enum DrawingTool {
   Brush = "brush",
   Eraser = "eraser",
+  Emoji = "emoji",
+  Text = "text",
 }
