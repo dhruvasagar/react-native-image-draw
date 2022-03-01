@@ -38,7 +38,7 @@ Here's a more complex example:
   ```tsx
   import React, { useRef } from 'react';
   import { Button } from 'react-native';
-  import { Canvas, CanvasRef } from '@benjeau/react-native-draw';
+  import { Canvas, CanvasRef } from 'react-native-image-draw';
 
   export default () => {
     const canvasRef = useRef<CanvasRef>(null);
@@ -70,132 +70,6 @@ Here's a more complex example:
 </details>
 
 https://user-images.githubusercontent.com/22248828/152837975-a51bdcf5-9a62-4aa2-8e5e-26c1d52fcf79.mp4
-
-### Example with `@BenJeau/react-native-draw-extras`
-
-This uses the
-[`@benjeau/react-native-draw-extras`](https://github.com/BenJeau/react-native-draw/tree/master/packages/react-native-draw-extras)
-npm package for the color picker and the bottom buttons/brush preview.
-
-> As this package does not depend on `@BenJeau/react-native-draw-extras`, it
-> is completely optional and you can build your own supporting UI, just like
-> the previous example
-
-<details>
-  <summary>Extras example - Code snippet</summary>
-  ```tsx
-  import React, { useRef, useState } from 'react';
-  import { Animated, StyleSheet, View } from 'react-native';
-  import {
-    BrushProperties,
-    Canvas,
-    CanvasControls,
-    CanvasRef,
-    DEFAULT_COLORS,
-    DrawingTool,
-  } from '@benjeau/react-native-draw';
-
-  export default () => {
-    const canvasRef = useRef<CanvasRef>(null);
-
-    const [color, setColor] = useState(DEFAULT_COLORS[0][0][0]);
-    const [thickness, setThickness] = useState(5);
-    const [opacity, setOpacity] = useState(1);
-    const [tool, setTool] = useState(DrawingTool.Brush);
-    const [visibleBrushProperties, setVisibleBrushProperties] = useState(false);
-
-    const handleUndo = () => {
-      canvasRef.current?.undo();
-    };
-
-    const handleClear = () => {
-      canvasRef.current?.clear();
-    };
-
-    const handleToggleEraser = () => {
-      setTool((prev) =>
-        prev === DrawingTool.Brush ? DrawingTool.Eraser : DrawingTool.Brush
-      );
-    };
-
-    const [overlayOpacity] = useState(new Animated.Value(0));
-    const handleToggleBrushProperties = () => {
-      if (!visibleBrushProperties) {
-        setVisibleBrushProperties(true);
-
-        Animated.timing(overlayOpacity, {
-          toValue: 1,
-          duration: 200,
-          useNativeDriver: true,
-        }).start();
-      } else {
-        Animated.timing(overlayOpacity, {
-          toValue: 0,
-          duration: 200,
-          useNativeDriver: true,
-        }).start(() => {
-          setVisibleBrushProperties(false);
-        });
-      }
-    };
-
-    return (
-      <>
-        <Canvas
-          ref={canvasRef}
-          height={600}
-          color={color}
-          thickness={thickness}
-          opacity={opacity}
-          tool={tool}
-          style={{
-            borderBottomWidth: StyleSheet.hairlineWidth,
-            borderColor: '#ccc',
-          }}
-        />
-        <View>
-          <CanvasControls
-            onUndo={handleUndo}
-            onClear={handleClear}
-            onToggleEraser={handleToggleEraser}
-            onToggleBrushProperties={handleToggleBrushProperties}
-            tool={tool}
-            color={color}
-            opacity={opacity}
-            thickness={thickness}
-          />
-          {visibleBrushProperties && (
-            <BrushProperties
-              color={color}
-              thickness={thickness}
-              opacity={opacity}
-              onColorChange={setColor}
-              onThicknessChange={setThickness}
-              onOpacityChange={setOpacity}
-              style={{
-                position: 'absolute',
-                bottom: 80,
-                left: 0,
-                right: 0,
-                padding: 10,
-                backgroundColor: '#f2f2f2',
-                borderTopEndRadius: 10,
-                borderTopStartRadius: 10,
-                borderWidth: StyleSheet.hairlineWidth,
-                borderBottomWidth: 0,
-                borderTopColor: '#ccc',
-                opacity: overlayOpacity,
-              }}
-            />
-          )}
-        </View>
-      </>
-    );
-  };
-  ```
-</details>
-
-https://user-images.githubusercontent.com/22248828/152837922-757d3a13-1d35-409a-936a-b38ea9248262.mp4
 
 ## Props
 
