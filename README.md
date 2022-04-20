@@ -127,3 +127,7 @@ If you cannot draw on the canvas, make sure you have followed the extra steps of
 ## License
 
 MIT
+
+## Credit
+
+This is largely based on https://github.com/BenJeau/react-native-draw
